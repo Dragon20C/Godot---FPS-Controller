@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
+[ext_resource path="res://Dot.png" type="Texture" id=2]
+[ext_resource path="res://sounds/Footstep2.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/Footstep1.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/Footstep3.wav" type="AudioStream" id=5]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 2.0
+
+[sub_resource type="CapsuleMesh" id=2]
+mid_height = 2.0
+
+[node name="PlayerController" type="KinematicBody"]
+script = ExtResource( 1 )
+footstep1 = ExtResource( 4 )
+footstep2 = ExtResource( 3 )
+footstep3 = ExtResource( 5 )
+
+[node name="RayCasts" type="Spatial" parent="."]
+
+[node name="RoofRay" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.516, -0.078 )
+cast_to = Vector3( 0, 3, 0 )
+
+[node name="RoofRay1" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.516, -1.47539 )
+cast_to = Vector3( 0, 3, 0 )
+
+[node name="RoofRay2" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45824, 1.516, -0.0461318 )
+cast_to = Vector3( 0, 3, 0 )
+
+[node name="RoofRay3" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.516, 1.26997 )
+cast_to = Vector3( 0, 3, 0 )
+
+[node name="RoofRay4" type="RayCast" parent="RayCasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29526, 1.516, -0.0431702 )
+cast_to = Vector3( 0, 3, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.516, -0.078 )
+current = true
+fov = 90.0
+
+[node name="CollisionMesh" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0396087, 1.98977, -1.94289e-15 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="CollisionMesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0396087, -2.98108e-10, -0.00681996 )
+visible = false
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CrossHair" type="Sprite" parent="."]
+modulate = Color( 0.0313726, 0, 1, 1 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="FootstepsSoundEmiiter" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.182563, 0 )
+
+[node name="FootstepTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true

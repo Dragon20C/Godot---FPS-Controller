@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Ladder.gd" type="Script" id=1]
+
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 1.5, 5, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.490196, 0.490196, 0.490196, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.74972, 2.66219, 0.168341 )
+
+[node name="Ladder" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Ladder" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50544, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="DetectPlayer" type="Area" parent="Ladder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.172603 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Ladder/DetectPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.156267, 0.423383 )
+shape = SubResource( 2 )
