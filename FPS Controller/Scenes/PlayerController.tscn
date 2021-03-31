@@ -1,16 +1,32 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Dot.png" type="Texture" id=2]
 [ext_resource path="res://sounds/Footstep2.wav" type="AudioStream" id=3]
 [ext_resource path="res://sounds/Footstep1.wav" type="AudioStream" id=4]
 [ext_resource path="res://sounds/Footstep3.wav" type="AudioStream" id=5]
+[ext_resource path="res://Textures/GreenBar.png" type="Texture" id=6]
+[ext_resource path="res://Textures/WhiteBar.png" type="Texture" id=7]
+[ext_resource path="res://Roboto-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
 
 [sub_resource type="CapsuleMesh" id=2]
 mid_height = 2.0
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 500, 80 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 500, 80 )
+
+[sub_resource type="DynamicFont" id=5]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 8 )
 
 [node name="PlayerController" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -66,3 +82,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.182563, 0 )
 [node name="FootstepTimer" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
+
+[node name="UI_Layer" type="CanvasLayer" parent="."]
+
+[node name="Stamina_Bar" type="ProgressBar" parent="UI_Layer"]
+margin_left = 172.093
+margin_top = 730.881
+margin_right = 524.093
+margin_bottom = 762.881
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

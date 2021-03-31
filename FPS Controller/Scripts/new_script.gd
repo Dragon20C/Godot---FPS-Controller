@@ -125,31 +125,4 @@ func _physics_process(delta):
 	final_velocity.y = gravity_vec.y
 	move_and_slide(final_velocity * speed, Vector3.UP)
 	
-func footsteps_controller():
-	if footstep_timer.is_stopped():
-		if velocity != Vector3() and is_on_floor() and !sprinting and !crouched:
-			play_footstep(0)
-			footstep_timer.wait_time = 0.6
-			footstep_timer.start()
-		elif velocity != Vector3() and is_on_floor() and sprinting and !crouched:
-			play_footstep(1)
-			footstep_timer.wait_time = 0.4
-			footstep_timer.start()
-		elif velocity != Vector3() and is_on_floor() and !sprinting and crouched:
-			play_footstep(-6)
-			footstep_timer.wait_time = 0.8
-			footstep_timer.start()
-	if is_on_floor() and !on_floor:
-		play_footstep(4)
-	if velocity == Vector3() and is_on_floor():
-		footstep_timer.stop()
 
-func play_footstep(volume):
-	var audio_node = AudioStreamPlayer.new()
-	var footstep_sound = randi() % footsteps.size()
-	audio_node.stream = footsteps[footstep_sound]
-	audio_node.volume_db = volume
-	add_child(audio_node)
-	audio_node.play()
-	yield(get_tree().create_timer(2), "timeout")
-	audio_node.queue_free()
